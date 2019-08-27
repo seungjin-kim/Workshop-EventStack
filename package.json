@@ -1,0 +1,37 @@
+{
+  "name": "yes",
+  "version": "1.0.0",
+  "description": "a fullstack workshop that incorporates the EventBrite API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ckallemeyn/Workshop-EventStack.git"
+  },
+  "author": "ckallemeyn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ckallemeyn/Workshop-EventStack/issues"
+  },
+  "homepage": "https://github.com/ckallemeyn/Workshop-EventStack#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.11",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}
