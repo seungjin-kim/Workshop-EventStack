@@ -6,14 +6,6 @@ export default function EventList({ events, search, reset }) {
     (e.name.includes(search)) ? e : null
   ));
 
-  // if (filteredEvents.length < 1) {
-  //   setTimeout(() => {
-  //     reset();
-  //   }, 3000)
-  //   return (
-  //     <h4>Event not found. please try again</h4>
-  //   )
-  // }
   return (
     <Fragment>
       <ul>

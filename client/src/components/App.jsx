@@ -15,6 +15,7 @@ export default class App extends Component {
         { name: 'ReactConf' },
       ],
       searchEvents: '',
+      addEvent: '',
       search: '',
       submitted: false,
     }
@@ -22,18 +23,16 @@ export default class App extends Component {
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.addEvent = this.addEvent.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const app = this;
 
-    // if (app.state.searchEvents !== '') {
-      this.setState({
-        submitted: true,
-        searchEvents: ''
-      });
-    // }
+    this.setState({
+      submitted: true,
+    });
   }
 
   resetState(e) {
@@ -44,31 +43,61 @@ export default class App extends Component {
     this.setState({
       submitted: false,
       searchEvents: '',
+      addEvent: '',
       search: ''
     })
   }
 
   handleSearch(e) {
     const { name, value } = e.target;
-    console.log('here is name: ', name);
-    console.log('here is value: ', value);
-    if (value.length < 1) {
+    if (value.length < 1 || value ==='' && this.state.submitted === true) {
       this.resetState();
     } else {
-      this.setState({
-        [name]: value,
-        search: value,
-      })
+      let obj = (name !== 'searchEvents')
+        ? { [name] : value }
+        : {
+            [name] : value,
+            search: value
+          }
+      this.setState(obj)
     }
   }
 
+  addEvent(e) {
+    e.preventDefault();
+    let newEvent = { name: this.state.addEvent };
+    let updatedEvents = this.state.events.concat([newEvent]);
+    if (this.state.addEvent.length <= 4) {
+      alert('events must contain atleast 4 characters');
+      return;
+    }
+    this.setState({
+      events: updatedEvents,
+      addEvent: '',
+    });
+  }
+
   render() {
-    const { events, search, searchEvents, submitted } = this.state;
+    const {
+      events,
+      search,
+      addEvent,
+      searchEvents,
+      submitted } = this.state;
+
     return (
       <div>
-        <h1>EventStack</h1>
+        <h1 className="title">EventStack</h1>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="searchEvents">Search Events </label>
+          <input id="addEvent" type="text"
+            name="addEvent"
+            value={addEvent}
+            placeholder="Add an event title here"
+            onChange={this.handleSearch}
+          />
+          <button id="addBtn" onClick={this.addEvent}> Add </button>
+          <br/>
+          <label htmlFor="searchEvents"> Search Events: </label>
           <input id="searchEvents" type="text"
             name="searchEvents"
             value={searchEvents}
