@@ -5,7 +5,7 @@ export default function EventList({ events }) {
     <Fragment>
       <ul>
         {events.map((event, i) => (
-          <li key={i}>{event.name}</li>
+          <li key={i}> {event.name} </li>
         ))}
       </ul>
     </Fragment>
