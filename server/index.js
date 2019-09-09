@@ -16,25 +16,13 @@ mongoose.connect('mongodb://localhost/Events', { useNewUrlParser: true })
   .catch((err) => console.error('mongoose connection error: ', err))
 
 
-app.get('/events', (req,res) => {
+app.get('/events', (req, res) => {
 
 });
 
 app.post('/events', (req, res) => {
-  let event = {
-    ID: 1,
-    title: 'ReactConf',
-    description: 'The offical Facebook React conference',
-    summary: 'Two full days of knowledge sharing and community with people who build and LOVE React.',
-    startDate: 'October 24, 2019',
-    endDate: 'October 25, 2019',
-    cost:420
-  };
-
-  storeEvent(event, res)
-
+  // storeEvent(res);
 });
-
 
 
 

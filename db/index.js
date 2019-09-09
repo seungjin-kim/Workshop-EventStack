@@ -14,17 +14,7 @@ const eventSchema = new Schema({
 const Event = mongoose.model('Event', eventSchema);
 
 
-// event controller
-const storeEvent = (event, res) => {
-  let userEvent = new Event(event);
-  userEvent.save()
-    .then((results) => {
-      console.log('successfully saved the document', results);
-      res.sendStatus(201)
-    })
-    .catch((err) => console.error('unable to save event to db', err))
-}
-/*
+
 
 let events = [
   {
@@ -61,7 +51,7 @@ let events = [
     summary: 'Two full days of knowledge sharing and community with people who build and LOVE React.',
     startDate: 'March 2, 2020',
     endDate: 'March 4, 2020',
-    cost 795
+    cost: 795
   },
   {
     ID: 5,
@@ -72,18 +62,18 @@ let events = [
     endDate: 'May 3rd, 2019',
     cost:1100
   },
-]*/
+];
 
-
-
-
-
-
-
-
-
-
-
+// event controller
+const storeEvent = (res) => {
+  // let userEvent = new Event(event);
+  Event.insertMany(events)
+    .then((results) => {
+      console.log('successfully saved the document', results);
+      res.sendStatus(201)
+    })
+    .catch((err) => console.error('unable to save event to db', err))
+};
 
 
 exports.storeEvent = storeEvent;
