@@ -77,3 +77,4 @@ const storeEvent = (res) => {
 
 
 exports.storeEvent = storeEvent;
+exports.Event = Event;

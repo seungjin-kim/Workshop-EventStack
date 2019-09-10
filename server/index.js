@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3007;
 const mongoose = require('mongoose');
 const { storeEvent }  = require('../db/index.js');
+const { retrieveEvents } = require('../db/controllers.js');
 
 app.use(express.static('public/dist'));
 app.use(bodyParser.json());
@@ -17,7 +18,7 @@ mongoose.connect('mongodb://localhost/Events', { useNewUrlParser: true })
 
 
 app.get('/events', (req, res) => {
-
+  retrieveEvents(res);
 });
 
 app.post('/events', (req, res) => {
