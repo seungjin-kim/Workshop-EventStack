@@ -1,9 +1,8 @@
 import React, { Fragment } from 'react'
 
 export default function EventList({ events, search, reset }) {
-
   let filteredEvents = events.filter((e) => (
-    (e.name.includes(search)) ? e : null
+    (e.title.includes(search)) ? e : null
   ));
 
   return (
@@ -16,7 +15,7 @@ export default function EventList({ events, search, reset }) {
               </span>
             </h4>
           : filteredEvents.map((event, i) => {
-              return <li key={i}>{ event.name }</li>
+              return <li key={i}>{ event.title }</li>
         })
         }
       </ul>

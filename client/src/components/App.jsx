@@ -7,13 +7,7 @@ export default class App extends Component {
     super(props)
 
     this.state = {
-      events: [
-        { name: 'AngularConnect' },
-        { name: 'DevFest' },
-        { name: 'JSConf' },
-        { name: 'VueConf' },
-        { name: 'ReactConf' },
-      ],
+      events: [],
       searchEvents: '',
       addEvent: '',
       search: '',
@@ -120,7 +114,7 @@ export default class App extends Component {
           />
           <input type="submit" value="submit" />
         </form>
-        {(submitted)
+        {(submitted && events.length > 0)
           ? <EventList
               events={events}
               search={search}
