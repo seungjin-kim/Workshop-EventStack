@@ -18,7 +18,7 @@ mongoose.connect('mongodb://localhost/Events', { useNewUrlParser: true })
 
 
 app.get('/events', (req, res) => {
-  retrieveEvents(res);
+  return retrieveEvents(res);
 });
 
 app.post('/events', (req, res) => {

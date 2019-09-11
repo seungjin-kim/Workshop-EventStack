@@ -77,6 +77,21 @@ export default class App extends Component {
     });
   }
 
+  componentDidMount() {
+    const app = this;
+    fetch('/events')
+      .then((eventData) => {
+        return eventData.json()
+      })
+      .then((data) => {
+        console.log('found the type', typeof data)
+        console.log('found the data', data)
+        let events = data
+        app.setState({ events })
+      })
+      .catch((err) => console.error('unable to retrieve data', err));
+  }
+
   render() {
     const {
       events,
