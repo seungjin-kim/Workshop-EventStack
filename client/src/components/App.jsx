@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import EventList from './EventList.jsx';
+import AddEventForm from './AddEventForm.jsx';
 
 
 export default class App extends Component {
@@ -14,8 +15,10 @@ export default class App extends Component {
       submitted: false,
     }
 
+    this.userEvent = {}
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.resetState = this.resetState.bind(this);
     this.addEvent = this.addEvent.bind(this);
   }
@@ -30,9 +33,7 @@ export default class App extends Component {
   }
 
   resetState(e) {
-    if (e) {
-      e.preventDefault();
-    }
+    e.preventDefault();
 
     this.setState({
       submitted: false,
@@ -57,32 +58,35 @@ export default class App extends Component {
     }
   }
 
+  handleInputChange(e) {
+    const { name, value } = e.target;
+    this.userEvent[name] = value;
+  }
+
   addEvent(e) {
     e.preventDefault();
-    let newEvent = { name: this.state.addEvent };
-    let updatedEvents = this.state.events.concat([newEvent]);
-    if (this.state.addEvent.length <= 4) {
-      alert('events must contain atleast 4 characters');
-      return;
-    }
-    this.setState({
-      events: updatedEvents,
-      addEvent: '',
-    });
+    this.userEvent.ID = this.state.events.length;
+    
+    let options = {
+      method: 'POST',
+      body: JSON.stringify(this.userEvent),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    fetch('/events', options)
+      .then((res) => res.json())
+      .then((response) => console.log('found the response obj: ', response))
+      .catch((err) => console.error('error within posting data to server', err))
+
   }
 
   componentDidMount() {
     const app = this;
     fetch('/events')
-      .then((eventData) => {
-        return eventData.json()
-      })
-      .then((data) => {
-        console.log('found the type', typeof data)
-        console.log('found the data', data)
-        let events = data
-        app.setState({ events })
-      })
+      .then((eventData) => eventData.json())
+      .then((events) => app.setState({ events }))
       .catch((err) => console.error('unable to retrieve data', err));
   }
 
@@ -97,7 +101,7 @@ export default class App extends Component {
     return (
       <div>
         <h1 className="title">EventStack</h1>
-        <form onSubmit={this.handleSubmit}>
+        {/* <form onSubmit={this.handleSubmit}>
           <input id="addEvent" type="text"
             name="addEvent"
             value={addEvent}
@@ -121,7 +125,11 @@ export default class App extends Component {
               reset={this.resetState}
             />
           : null
-        }
+        } */}
+        <br/>
+        <br/>
+        <hr/>
+        <AddEventForm handleInputChange={this.handleInputChange} addEvent={this.addEvent}/>
         </div>
     )
   }

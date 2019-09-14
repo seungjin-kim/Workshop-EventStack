@@ -1,11 +1,10 @@
 const bodyParser = require('body-parser');
 const express = require('express');
+const mongoose = require('mongoose');
 const morgan = require('morgan');
 const app = express();
 const PORT = process.env.PORT || 3007;
-const mongoose = require('mongoose');
-const { storeEvent }  = require('../db/index.js');
-const { retrieveEvents } = require('../db/controllers.js');
+const { retrieveEvents, storeEvent } = require('../db/controllers.js');
 
 app.use(express.static('public/dist'));
 app.use(bodyParser.json());
@@ -22,7 +21,9 @@ app.get('/events', (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  // storeEvent(res);
+  console.log('found the Body of the form!', req.body);
+  let event = req.body
+  storeEvent(event, res);
 });
 
 

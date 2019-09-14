@@ -13,9 +13,6 @@ const eventSchema = new Schema({
 
 const Event = mongoose.model('Event', eventSchema);
 
-
-
-
 let events = [
   {
     ID: 1,
@@ -64,17 +61,5 @@ let events = [
   },
 ];
 
-// event controller
-const storeEvent = (res) => {
-  // let userEvent = new Event(event);
-  Event.insertMany(events)
-    .then((results) => {
-      console.log('successfully saved the document', results);
-      res.sendStatus(201)
-    })
-    .catch((err) => console.error('unable to save event to db', err))
-};
 
-
-exports.storeEvent = storeEvent;
 exports.Event = Event;
