@@ -33,9 +33,7 @@ export default class App extends Component {
     });
   }
 
-  resetState(e) {
-    e.preventDefault();
-
+  resetState() {
     this.setState({
       submitted: false,
       searchEvents: '',
@@ -45,7 +43,6 @@ export default class App extends Component {
   }
 
   handleSearch(e) {
-    e.preventDefault();
     const { name, value } = e.target;
     if (value.length < 1 || value ==='' && this.state.submitted === true) {
       this.resetState();
