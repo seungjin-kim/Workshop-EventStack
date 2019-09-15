@@ -50,7 +50,7 @@ export default class App extends Component {
 
   handleSearch(e) {
     const { name, value } = e.target;
-    if (value.length < 1 || value ==='' && this.state.submitted === true) {
+    if (value.length < 1 || value === '' && this.state.submitted === true) {
       this.resetState();
     } else {
       let obj = (name !== 'searchEvents')
