@@ -50,8 +50,7 @@ export default class App extends Component {
 
   handleSearch(e) {
     const { name, value } = e.target;
-    console.log('here is name: ', name);
-    console.log('here is value: ', value);
+
     if (value.length < 1) {
       this.resetState();
     } else {
