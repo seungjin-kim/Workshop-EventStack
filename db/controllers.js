@@ -1,4 +1,4 @@
-const { Event } = require('../db/index.js');
+const { Event, events } = require('../db/index.js');
 
 const retrieveEvents = (res) => {
   Event.find().exec()
@@ -16,6 +16,16 @@ const storeEvent = (event, res) => {
     .catch((err) => console.error('unable to save event to db', err))
 };
 
+const registerEvents = (res) => {
+  Event.insertMany(events)
+    .then((results) => {
+    console.log('successfully saved the events data', results);
+    res.sendStatus(201)
+  })
+  .catch((err) => console.error('unable to save events to db', err));
+}
+
 
 exports.storeEvent = storeEvent;
 exports.retrieveEvents = retrieveEvents;
+exports.registerEvents = registerEvents;

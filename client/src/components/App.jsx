@@ -15,12 +15,13 @@ export default class App extends Component {
       submitted: false,
     }
 
-    this.userEvent = {}
+    this.userEvent = {};
     this.handleSearch = this.handleSearch.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.resetState = this.resetState.bind(this);
     this.addEvent = this.addEvent.bind(this);
+    this.collectEvents = this.collectEvents.bind(this);
   }
 
   handleSubmit(e) {
@@ -44,6 +45,7 @@ export default class App extends Component {
   }
 
   handleSearch(e) {
+    e.preventDefault();
     const { name, value } = e.target;
     if (value.length < 1 || value ==='' && this.state.submitted === true) {
       this.resetState();
@@ -65,8 +67,9 @@ export default class App extends Component {
 
   addEvent(e) {
     e.preventDefault();
-    this.userEvent.ID = this.state.events.length;
-    
+    const app = this;
+    this.userEvent.ID = this.state.events.length + 1;
+    console.log('FOUND THE USER EVENT OBJ: ', this.userEvent)
     let options = {
       method: 'POST',
       body: JSON.stringify(this.userEvent),
@@ -76,18 +79,20 @@ export default class App extends Component {
     };
 
     fetch('/events', options)
-      .then((res) => res.json())
-      .then((response) => console.log('found the response obj: ', response))
+      .then((response) => app.collectEvents())
       .catch((err) => console.error('error within posting data to server', err))
-
   }
 
-  componentDidMount() {
+  collectEvents() {
     const app = this;
     fetch('/events')
       .then((eventData) => eventData.json())
       .then((events) => app.setState({ events }))
       .catch((err) => console.error('unable to retrieve data', err));
+  }
+
+  componentDidMount() {
+    this.collectEvents();
   }
 
   render() {
@@ -101,15 +106,8 @@ export default class App extends Component {
     return (
       <div>
         <h1 className="title">EventStack</h1>
-        {/* <form onSubmit={this.handleSubmit}>
-          <input id="addEvent" type="text"
-            name="addEvent"
-            value={addEvent}
-            placeholder="Add an event title here"
-            onChange={this.handleSearch}
-          />
-          <button id="addBtn" onClick={this.addEvent}> Add </button>
-          <br/>
+        <form onSubmit={this.handleSubmit}>
+
           <label htmlFor="searchEvents"> Search Events: </label>
           <input id="searchEvents" type="text"
             name="searchEvents"
@@ -125,7 +123,7 @@ export default class App extends Component {
               reset={this.resetState}
             />
           : null
-        } */}
+        }
         <br/>
         <br/>
         <hr/>

@@ -4,9 +4,16 @@ function addEventForm({ handleInputChange, addEvent }) {
 
   return (
     <Fragment>
+      <h2> Submit an Event! </h2>
+        <p>Please fill out each date in the following format:
+            "May 30, 2012"
+        </p>
+        <p>
+          All cost fields are in USD.
+        </p>
       <form onSubmit={addEvent}>
-        <label htmlFor="eventTitle">title: </label>
-        <input id="eventTitle" type="text" name="eventTitle"
+        <label htmlFor="title">title: </label>
+        <input id="eventTitle" type="text" name="title"
           onChange={handleInputChange} />
         <br/>
         <label htmlFor="description">description: </label>

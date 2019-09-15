@@ -63,3 +63,4 @@ let events = [
 
 
 exports.Event = Event;
+exports.events = events;

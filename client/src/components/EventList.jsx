@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 
 export default function EventList({ events, search, reset }) {
+
   let filteredEvents = events.filter((e) => (
     (e.title.includes(search)) ? e : null
   ));
