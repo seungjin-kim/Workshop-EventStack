@@ -21,9 +21,8 @@ app.get('/events', (req, res) => {
 });
 
 app.post('/events', (req, res) => {
-  storeEvent(res);
+  storeEvents(res);
 });
-
 
 
 app.listen(PORT, () => console.log(`app is listening on port ${PORT}`));
